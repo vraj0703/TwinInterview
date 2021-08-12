@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:twin_app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="model"
-            type="com.example.twininterview.android.data.domain.food.model.Food"/>
+            type="com.example.twininterview.android.data.domain.food.model.Food" />
 
         <variable
             name="isSelected"
-            type="Boolean"/>
+            type="Boolean" />
 
+        <variable
+            name="toggleSelected"
+            type="com.example.twininterview.android.extensions.IToggleView" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +33,7 @@
             app:layout_constraintEnd_toStartOf="@+id/tvCustomChoice"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            twin_app:loadImage="@{model.imageUrl}" />
 
         <TextView
             android:id="@+id/tvCustomChoice"
@@ -41,7 +45,8 @@
             android:layout_toStartOf="@+id/ivSelection"
             android:fontFamily="@font/hk_grotesk_bold"
             android:paddingEnd="8dp"
-            android:textColor="@color/twins_green"
+            android:text="@{model.title}"
+            android:textColor="@{model.isTfy ? @color/twins_green : @color/red}"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ivSelection"
@@ -52,19 +57,19 @@
 
         <ToggleButton
             android:id="@+id/ivSelection"
-            android:layout_alignParentEnd="true"
             android:layout_width="34dp"
             android:layout_height="34dp"
+            android:layout_alignParentEnd="true"
             android:layout_marginVertical="12dp"
             android:layout_marginEnd="24dp"
+            android:background="@drawable/ic_add_meal"
+            android:backgroundTint="@{safeUnbox(isSelected) ? @color/twins_green: @color/background_grey}"
+            android:onClick="@{() -> toggleSelected.clicked(safeUnbox(isSelected))}"
             android:textOff=""
             android:textOn=""
-            android:backgroundTint="@{safeUnbox(isSelected) ? @color/twins_green: @color/background_grey}"
-            android:background="@drawable/ic_add_meal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
