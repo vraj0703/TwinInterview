@@ -4,11 +4,8 @@ import com.example.twininterview.android.data.domain.food.model.Food
 import javax.inject.Inject
 import javax.inject.Singleton
 import com.example.twininterview.android.InterviewApplication
-import com.example.twininterview.android.extensions.fromJson
-import com.example.twininterview.android.extensions.fromTypeToken
 import com.google.gson.reflect.TypeToken
 import com.example.twininterview.android.extensions.loadJSONFromAsset
-import com.example.twininterview.android.extensions.gson
 import java.lang.Exception
 import com.google.gson.Gson
 import java.util.*
